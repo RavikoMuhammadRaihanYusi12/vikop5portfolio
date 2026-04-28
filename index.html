@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raviko Muhammad | Persona Portfolio</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Oswald:wght@700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Frameworks & Tools -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white overflow-x-hidden font-['Montserrat']">
+
+    <!-- Persona 5 Background Pattern -->
+    <div class="fixed inset-0 z-[-1] opacity-20 pointer-events-none p5-bg-pattern"></div>
+
+    <!-- BGM: Persona 5 Background Music (looped) -->
+    <audio id="bgm" src="assets/Persona 5 Background.mp3" loop preload="auto"></audio>
+
+    <!-- Copyright Toast Notification -->
+    <div id="copyright-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] pointer-events-none" style="opacity:0">
+        <div class="flex items-center gap-3 bg-black border-l-4 border-red-600 px-5 py-3 skew-x-[-5deg] shadow-[6px_6px_0_rgba(208,0,0,0.6)]">
+            <span class="text-red-500 text-lg">♪</span>
+            <p class="font-['Montserrat'] font-bold uppercase tracking-wider text-white text-sm skew-x-[5deg]">
+                Background SFX Copyright by <span class="text-red-500">ATLUS</span>
+            </p>
+            <span class="text-red-500 text-lg">♪</span>
+        </div>
+    </div>
+
+    <!-- Music Toggle Button (bottom-left) -->
+    <button id="bgm-toggle-btn" class="fixed bottom-5 left-5 z-[150] p5-bgm-btn" aria-label="Toggle Music" title="Toggle BGM">
+        <span id="bgm-icon" class="font-['Montserrat'] font-black text-xs uppercase tracking-tighter">♪ BGM</span>
+    </button>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button id="mobile-menu-btn" class="fixed top-4 right-4 z-[100] md:hidden p5-hamburger-btn" aria-label="Toggle Menu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </button>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-nav-overlay" class="fixed inset-0 bg-black/90 z-[90] md:hidden hidden flex-col items-center justify-center gap-5">
+        <button hx-get="sections/about.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item-mobile" onclick="closeMobileMenu()">
+            <span class="bg-white text-black px-8 py-3 skew-x-[-15deg] font-black text-2xl uppercase tracking-tighter block hover:bg-red-600 hover:text-white transition-colors duration-200">About Me</span>
+        </button>
+        <button hx-get="sections/education.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item-mobile" onclick="closeMobileMenu()">
+            <span class="bg-white text-black px-8 py-3 skew-x-[-15deg] font-black text-2xl uppercase tracking-tighter block hover:bg-red-600 hover:text-white transition-colors duration-200">Education</span>
+        </button>
+        <button hx-get="sections/skills.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item-mobile" onclick="closeMobileMenu()">
+            <span class="bg-white text-black px-8 py-3 skew-x-[-15deg] font-black text-2xl uppercase tracking-tighter block hover:bg-red-600 hover:text-white transition-colors duration-200">Skills</span>
+        </button>
+        <button hx-get="sections/projects.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item-mobile" onclick="closeMobileMenu()">
+            <span class="bg-white text-black px-8 py-3 skew-x-[-15deg] font-black text-2xl uppercase tracking-tighter block hover:bg-red-600 hover:text-white transition-colors duration-200">Projects</span>
+        </button>
+        <button hx-get="sections/experience.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item-mobile" onclick="closeMobileMenu()">
+            <span class="bg-white text-black px-8 py-3 skew-x-[-15deg] font-black text-2xl uppercase tracking-tighter block hover:bg-red-600 hover:text-white transition-colors duration-200">Experience</span>
+        </button>
+        <button hx-get="sections/contact.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item-mobile" onclick="closeMobileMenu()">
+            <span class="bg-red-600 text-white px-8 py-3 skew-x-[-15deg] font-black text-2xl uppercase tracking-tighter block hover:bg-white hover:text-black transition-colors duration-200">Contact</span>
+        </button>
+    </div>
+
+    <!-- Desktop Navigation Menu (Persona Style + HTMX) -->
+    <nav class="fixed top-10 right-10 z-50 flex-col gap-4 items-end pointer-events-auto hidden md:flex" id="main-nav">
+        <button hx-get="sections/about.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item">
+            <span class="bg-white text-black px-4 py-2 skew-x-[-15deg] font-bold text-xl uppercase tracking-tighter hover:bg-red-600 hover:text-white transition-colors duration-200">About Me</span>
+        </button>
+        <button hx-get="sections/education.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item">
+            <span class="bg-white text-black px-4 py-2 skew-x-[-15deg] font-bold text-xl uppercase tracking-tighter hover:bg-red-600 hover:text-white transition-colors duration-200">Education</span>
+        </button>
+        <button hx-get="sections/skills.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item">
+            <span class="bg-white text-black px-4 py-2 skew-x-[-15deg] font-bold text-xl uppercase tracking-tighter hover:bg-red-600 hover:text-white transition-colors duration-200">Skills</span>
+        </button>
+        <button hx-get="sections/projects.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item">
+            <span class="bg-white text-black px-4 py-2 skew-x-[-15deg] font-bold text-xl uppercase tracking-tighter hover:bg-red-600 hover:text-white transition-colors duration-200">Projects</span>
+        </button>
+        <button hx-get="sections/experience.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item">
+            <span class="bg-white text-black px-4 py-2 skew-x-[-15deg] font-bold text-xl uppercase tracking-tighter hover:bg-red-600 hover:text-white transition-colors duration-200">Experience</span>
+        </button>
+        <button hx-get="sections/contact.html" hx-target="#main-display" hx-swap="innerHTML transition:true" class="p5-menu-item">
+            <span class="bg-white text-black px-4 py-2 skew-x-[-15deg] font-bold text-xl uppercase tracking-tighter hover:bg-red-600 hover:text-white transition-colors duration-200">Contact</span>
+        </button>
+    </nav>
+
+    <!-- Desktop Nav: Copyright Badge -->
+    <div class="fixed bottom-5 right-10 z-50 hidden md:block pointer-events-none">
+        <span class="font-['Montserrat'] text-[10px] font-bold uppercase tracking-widest text-red-700 opacity-60 skew-x-[-5deg] inline-block">
+            BGM © ATLUS
+        </span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative z-10">
+        
+        <!-- Dynamic Content Display (HTMX Target) -->
+        <div id="main-display" class="relative z-10 transition-all duration-500">
+            <!-- Initial content (Hero) -->
+            <section class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden" id="hero">
+                <div class="hero-bg-red absolute inset-0 bg-red-600 skew-y-[-10deg] -translate-y-1/2 z-0"></div>
+                
+                <div class="relative z-10 text-center px-4 sm:px-6 w-full max-w-5xl mx-auto">
+                    <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black italic tracking-tighter uppercase mb-2 p5-title">
+                        <span class="block bg-black inline-block px-4 skew-x-[-10deg]">Raviko</span><br>
+                        <span class="block bg-white text-black inline-block px-4 skew-x-[-10deg] -mt-2">Muhammad</span>
+                    </h1>
+                    <div class="mt-6 sm:mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
+                        <span class="nes-badge is-error skew-x-[-10deg]"><span class="px-2 text-xs sm:text-sm">Data Analyst</span></span>
+                        <span class="nes-badge is-dark skew-x-[-10deg]"><span class="px-2 text-xs sm:text-sm">Software Dev</span></span>
+                        <span class="nes-badge is-error skew-x-[-10deg]"><span class="px-2 text-xs sm:text-sm">UI/UX Designer</span></span>
+                    </div>
+                    <p class="mt-8 sm:mt-10 font-bold text-base sm:text-lg md:text-xl max-w-2xl mx-auto p5-desc px-2">
+                        Fresh graduate S1 Teknik Informatika UIN SUSKA RIAU. 
+                        Ready to take your heart through technology and design.
+                    </p>
+                    <!-- Mobile scroll hint -->
+                    <div class="mt-10 md:hidden animate-bounce text-red-400 text-sm font-bold uppercase tracking-widest">
+                        ↓ Tap menu icon to explore ↓
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

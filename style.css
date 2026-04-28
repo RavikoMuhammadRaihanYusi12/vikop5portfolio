@@ -1,0 +1,400 @@
+/* Persona 5 Theme Variables */
+:root {
+    --p5-red: #D00000;
+    --p5-black: #000000;
+    --p5-white: #FFFFFF;
+}
+
+body {
+    background-color: var(--p5-black);
+    color: var(--p5-white);
+    overflow-x: hidden;
+}
+
+/* Persona Background Pattern */
+.p5-bg-pattern {
+    background-image: 
+        radial-gradient(circle, rgba(208, 0, 0, 0.2) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+}
+
+/* Custom Persona Slants */
+.p5-title {
+    text-shadow: 4px 4px 0 var(--p5-red);
+    transform: skewY(-2deg);
+}
+
+.p5-menu-item {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.p5-menu-item:hover {
+    transform: translateX(-10px) scale(1.1);
+}
+
+/* Contact Buttons — Persona Nav Box Style */
+.p5-contact-btn {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.p5-contact-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* Softskill Items — Persona Nav Box Style */
+.p5-skill-item {
+    display: block;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+.p5-skill-item:hover {
+    transform: translateX(10px) scale(1.03);
+}
+
+/* ============================================
+   BGM TOGGLE BUTTON
+   ============================================ */
+.p5-bgm-btn {
+    background: var(--p5-black);
+    color: var(--p5-white);
+    border: 3px solid var(--p5-red);
+    padding: 8px 14px;
+    cursor: pointer;
+    transform: skewX(-8deg);
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.p5-bgm-btn:hover {
+    background: var(--p5-red);
+    color: var(--p5-white);
+    transform: skewX(-8deg) scale(1.08);
+}
+
+.p5-bgm-btn.bgm-muted {
+    border-color: #555;
+    color: #555;
+    background: #111;
+}
+
+.p5-bgm-btn.bgm-muted:hover {
+    background: #333;
+    color: #fff;
+    border-color: #fff;
+}
+
+
+/* ============================================
+   HAMBURGER BUTTON (Mobile)
+   ============================================ */
+.p5-hamburger-btn {
+    background: var(--p5-red);
+    border: 3px solid var(--p5-white);
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transform: skewX(-5deg);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.p5-hamburger-btn:hover {
+    background: var(--p5-white);
+}
+
+.p5-hamburger-btn:hover .hamburger-line {
+    background: var(--p5-black);
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 3px;
+    background: var(--p5-white);
+    transition: background 0.2s;
+    display: block;
+}
+
+/* Mobile nav overlay open state */
+#mobile-nav-overlay.is-open {
+    display: flex !important;
+}
+
+.p5-menu-item-mobile {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.p5-menu-item-mobile:hover {
+    transform: scale(1.05);
+}
+
+/* NES.css Persona-fication */
+.p5-nes-card {
+    border-width: 4px !important;
+    border-color: var(--p5-red) !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    transform: skewX(-2deg);
+}
+
+.p5-nes-card .title {
+    background-color: var(--p5-red) !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-style: italic !important;
+}
+
+/* Marquee Animation */
+.marquee-container {
+    display: flex;
+    width: fit-content;
+    height: 80px;
+    align-items: center;
+    animation: marquee 15s linear infinite;
+    will-change: transform;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Hover Effects */
+.project-card:hover .nes-container {
+    border-color: var(--p5-white) !important;
+    background-color: var(--p5-red) !important;
+}
+
+.project-card:hover h3 {
+    color: black !important;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--p5-red);
+}
+
+/* Hero Section Specifics */
+.hero-bg-red {
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+}
+
+/* Persona Photo Frame Styling */
+.p5-photo-wrapper {
+    perspective: 1000px;
+}
+
+.p5-photo-frame {
+    position: relative;
+    width: 260px;
+    height: 310px;
+    background: var(--p5-white);
+    border: 8px solid var(--p5-black);
+    transform: rotate(-5deg) skew(-5deg);
+    z-index: 10;
+    overflow: hidden;
+    box-shadow: 15px 15px 0 var(--p5-red);
+    transition: all 0.3s ease;
+}
+
+.p5-photo-frame:hover {
+    transform: rotate(0deg) skew(0deg) scale(1.05);
+    box-shadow: 20px 20px 0 var(--p5-black);
+}
+
+.p5-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(120%);
+}
+
+.p5-photo-decor-1 {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    border: 4px solid var(--p5-red);
+    transform: rotate(3deg) skew(2deg);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.p5-photo-decor-2 {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 60%;
+    height: 20px;
+    background: var(--p5-black);
+    transform: rotate(-2deg);
+    z-index: 11;
+}
+
+/* Marquee Logo Refining */
+.marquee-content img {
+    /* Filters removed for original colors */
+}
+
+/* HTMX Transitions */
+.htmx-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET (max-width: 1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+    /* Nav hides on smaller screens */
+    #main-nav {
+        top: 6px;
+        right: 6px;
+        gap: 3px;
+    }
+    #main-nav button span {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE (max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Photo frame sizes */
+    .p5-photo-frame {
+        width: 180px;
+        height: 220px;
+        box-shadow: 8px 8px 0 var(--p5-red);
+    }
+
+    /* Title shadow smaller on mobile */
+    .p5-title {
+        text-shadow: 2px 2px 0 var(--p5-red);
+    }
+
+    /* About section: stack vertically */
+    #about .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #about .p5-photo-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 24px;
+    }
+
+    /* Education: flex column on mobile */
+    .edu-item {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .edu-item > div:first-child {
+        min-width: unset !important;
+        width: fit-content;
+        font-size: 0.8rem;
+    }
+
+    /* Section paddings */
+    section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Skills grid: single column on mobile */
+    #skills .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Projects grid: single column */
+    #projects .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* Experience grid: single column */
+    #experience .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Contact buttons wrap nicely */
+    #contact .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #contact h2 {
+        font-size: 2.5rem !important;
+    }
+
+    /* Headings responsive */
+    h2.text-5xl {
+        font-size: 2rem !important;
+    }
+
+    /* NES balloon hidden on very small screens if it clips */
+    .nes-balloon {
+        display: none;
+    }
+
+    /* Marquee width fix on mobile */
+    .marquee-container {
+        height: 60px;
+    }
+
+    .marquee-content img {
+        height: 2.5rem !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL MOBILE (max-width: 480px)
+   ============================================ */
+@media (max-width: 480px) {
+    .p5-photo-frame {
+        width: 150px;
+        height: 185px;
+    }
+
+    .p5-title {
+        text-shadow: 1px 1px 0 var(--p5-red);
+    }
+
+    #contact h2 {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .nes-badge span {
+        font-size: 0.65rem;
+    }
+
+    /* Skew reductions for readability on tiny screens */
+    .skew-x-\[-15deg\] {
+        --tw-skew-x: -8deg;
+    }
+}
