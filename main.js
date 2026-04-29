@@ -258,10 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: "top 80%",
                 toggleActions: "play none none reverse"
             },
-            x: section === '#skills' ? 100 : -100,
+            x: -100,
             opacity: 0,
             duration: 1,
-            skewX: section === '#skills' ? 10 : -10,
+            skewX: -10,
             ease: "power3.out"
         });
     });

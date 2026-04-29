@@ -398,3 +398,532 @@ html {
         --tw-skew-x: -8deg;
     }
 }
+
+/* ============================================
+   EXPERIENCE — BROKEN GLASS PERSONA 5 CARDS
+   ============================================ */
+
+/* Card wrapper */
+.exp-card {
+    position: relative;
+    min-height: 380px;
+    background: #0a0a0a;
+    border: 2px solid var(--p5-red);
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    transform: skewX(-1deg);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.35s ease,
+                clip-path 0.35s ease;
+    box-shadow: 0 0 0 0 transparent,
+                inset 0 0 60px rgba(208,0,0,0.05);
+    cursor: default;
+}
+
+.exp-card:hover {
+    transform: skewX(0deg) translateY(-6px);
+    box-shadow: 8px 8px 0 var(--p5-red),
+                0 0 30px rgba(208,0,0,0.3),
+                inset 0 0 80px rgba(208,0,0,0.08);
+}
+
+/* Glass base layer */
+.exp-glass-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(208,0,0,0.12) 0%,
+        rgba(0,0,0,0.0) 40%,
+        rgba(208,0,0,0.06) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+.exp-glass-light {
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.07) 0%,
+        rgba(0,0,0,0.0) 40%,
+        rgba(255,255,255,0.04) 100%
+    );
+}
+
+/* Broken glass shards */
+.exp-shards {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.shard {
+    position: absolute;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: opacity 0.35s ease;
+}
+
+.exp-card:hover .shard {
+    opacity: 1.4;
+    background: rgba(208,0,0,0.06);
+    border-color: rgba(208,0,0,0.2);
+}
+
+/* Individual shard shapes */
+.shard-1 {
+    clip-path: polygon(0 0, 60% 0, 35% 55%, 0 80%);
+    top: 0; left: 0;
+    width: 55%; height: 60%;
+}
+.shard-2 {
+    clip-path: polygon(60% 0, 100% 0, 100% 50%, 35% 55%);
+    top: 0; left: 0;
+    width: 100%; height: 60%;
+}
+.shard-3 {
+    clip-path: polygon(0 80%, 35% 55%, 55% 100%, 0 100%);
+    top: 0; left: 0;
+    width: 60%; height: 100%;
+}
+.shard-4 {
+    clip-path: polygon(35% 0, 100% 50%, 100% 100%, 55% 100%, 35% 55%);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+.shard-5 {
+    clip-path: polygon(10% 30%, 50% 0, 50% 100%, 10% 70%);
+    top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: rgba(208,0,0,0.02);
+    border: none;
+    border-left: 1px solid rgba(208,0,0,0.15);
+    transform: rotate(2deg);
+}
+
+/* Cracked corner accents */
+.exp-corner-slash {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+    pointer-events: none;
+}
+.exp-corner-tl {
+    top: 0; left: 0;
+    border-top: 3px solid var(--p5-red);
+    border-left: 3px solid var(--p5-red);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+.exp-corner-br {
+    bottom: 0; right: 0;
+    border-bottom: 3px solid var(--p5-red);
+    border-right: 3px solid var(--p5-red);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* Character image */
+.exp-img-wrap {
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    width: 180px;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.exp-char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: drop-shadow(0 0 18px rgba(208,0,0,0.5)) contrast(110%);
+    opacity: 0.85;
+    transition: opacity 0.35s ease, filter 0.35s ease, transform 0.4s ease;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+}
+
+.exp-card:hover .exp-char-img {
+    opacity: 1;
+    filter: drop-shadow(0 0 28px rgba(208,0,0,0.8)) contrast(115%);
+    transform: translateY(-6px) scale(1.03);
+}
+
+/* Content overlay */
+.exp-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1.4rem 1.2rem;
+    max-width: calc(100% - 140px); /* leave room for character */
+}
+
+.exp-role-tag,
+.exp-company,
+.exp-location {
+    line-height: 1;
+}
+
+.exp-desc {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.72);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.02em;
+    /* Stylised thin red left border */
+    border-left: 2px solid var(--p5-red);
+    padding-left: 8px;
+}
+
+/* Responsive adjustments for exp cards */
+@media (max-width: 768px) {
+    .exp-card {
+        min-height: 320px;
+    }
+    .exp-img-wrap {
+        width: 130px;
+    }
+    .exp-content {
+        max-width: calc(100% - 110px);
+        padding: 1rem;
+    }
+    .exp-desc {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .exp-card {
+        min-height: 280px;
+    }
+    .exp-img-wrap {
+        width: 110px;
+        opacity: 0.55;
+    }
+    .exp-content {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   PROJECTS — PERSONA 5 ANIME FRAME CARDS
+   ============================================ */
+
+/* ---- Card link wrapper ---- */
+.prj-card {
+    display: block;
+    text-decoration: none;
+}
+
+/* ---- Main frame ---- */
+.prj-frame {
+    position: relative;
+    background: #0a0a0a;
+    overflow: hidden;
+    /* Angled cuts on all 4 corners — mimics reference */
+    clip-path: polygon(
+        22px 0%,
+        calc(100% - 22px) 0%,
+        100% 22px,
+        100% calc(100% - 22px),
+        calc(100% - 22px) 100%,
+        22px 100%,
+        0% calc(100% - 22px),
+        0% 22px
+    );
+    transform: skewX(-1.5deg);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease;
+    /* thick outer border feel via box-shadow since clip-path hides border */
+    box-shadow:
+        0 0 0 3px var(--p5-red),
+        6px 6px 0 0 var(--p5-red),
+        inset 0 0 40px rgba(208,0,0,0.06);
+}
+
+.prj-frame--white {
+    box-shadow:
+        0 0 0 3px #fff,
+        6px 6px 0 0 #fff,
+        inset 0 0 40px rgba(255,255,255,0.04);
+}
+
+.prj-card:hover .prj-frame {
+    transform: skewX(0deg) translateY(-8px);
+    box-shadow:
+        0 0 0 3px var(--p5-red),
+        10px 10px 0 0 var(--p5-red),
+        0 0 40px rgba(208,0,0,0.35),
+        inset 0 0 60px rgba(208,0,0,0.1);
+}
+
+.prj-card:hover .prj-frame--white {
+    box-shadow:
+        0 0 0 3px #fff,
+        10px 10px 0 0 #fff,
+        0 0 40px rgba(255,255,255,0.2),
+        inset 0 0 60px rgba(255,255,255,0.06);
+}
+
+/* ---- Corner accent cuts (visual only, drawn via pseudo) ---- */
+.prj-cut {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index: 4;
+    pointer-events: none;
+}
+.prj-cut--tl { top: 0;    left: 0;  border-top: 3px solid var(--p5-red);    border-left: 3px solid var(--p5-red);    clip-path: polygon(0 0, 100% 0, 0 100%); }
+.prj-cut--tr { top: 0;    right: 0; border-top: 3px solid var(--p5-red);    border-right: 3px solid var(--p5-red);   clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.prj-cut--bl { bottom: 0; left: 0;  border-bottom: 3px solid var(--p5-red); border-left: 3px solid var(--p5-red);    clip-path: polygon(0 0, 0 100%, 100% 100%); }
+.prj-cut--br { bottom: 0; right: 0; border-bottom: 3px solid var(--p5-red); border-right: 3px solid var(--p5-red);   clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+
+.prj-frame--white .prj-cut--tl,
+.prj-frame--white .prj-cut--tr,
+.prj-frame--white .prj-cut--bl,
+.prj-frame--white .prj-cut--br {
+    border-color: #fff;
+}
+
+/* ---- Diagonal arrow accents (from reference) ---- */
+.prj-arrow-left,
+.prj-arrow-right {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    z-index: 4;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease;
+}
+
+/* Left arrow — points left, red fill */
+.prj-arrow-left {
+    left: -4px;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 14px solid var(--p5-red);
+}
+.prj-arrow-left--white {
+    border-right-color: #fff;
+}
+
+/* Right arrow — points right */
+.prj-arrow-right {
+    right: -4px;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 14px solid var(--p5-red);
+}
+.prj-arrow-right--white {
+    border-left-color: #fff;
+}
+
+.prj-card:hover .prj-arrow-left,
+.prj-card:hover .prj-arrow-right {
+    opacity: 0.4;
+}
+
+/* ---- Scan-line gloss ---- */
+.prj-gloss {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.015) 0px,
+        rgba(255,255,255,0.015) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ---- Thumbnail area ---- */
+.prj-thumb {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.prj-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: contrast(110%) saturate(90%);
+    transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+/* joker art looks better contained */
+.prj-thumb-img--contain {
+    object-fit: contain;
+    background: #0a0a0a;
+}
+
+.prj-card:hover .prj-thumb-img {
+    transform: scale(1.07);
+    filter: contrast(115%) saturate(110%);
+}
+
+.prj-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(208,0,0,0.18) 70%,
+        rgba(0,0,0,0.85) 100%
+    );
+    z-index: 3;
+}
+.prj-thumb-overlay--white {
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(255,255,255,0.1) 70%,
+        rgba(0,0,0,0.85) 100%
+    );
+}
+
+/* ---- Card body ---- */
+.prj-body {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 1rem 1.1rem 1.1rem;
+}
+
+.prj-title {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.prj-subtitle {
+    margin: 0;
+    line-height: 1;
+}
+
+.prj-desc {
+    font-size: 0.68rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.68);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.02em;
+    margin-top: 6px;
+    border-left: 2px solid var(--p5-red);
+    padding-left: 8px;
+}
+
+/* ---- Footer row: tags + button ---- */
+.prj-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.prj-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.prj-tag {
+    background: rgba(208,0,0,0.2);
+    border: 1px solid rgba(208,0,0,0.5);
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+    transition: background 0.2s ease;
+}
+
+.prj-tag--dark {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.prj-card:hover .prj-tag {
+    background: rgba(208,0,0,0.45);
+}
+.prj-card:hover .prj-tag--dark {
+    background: rgba(255,255,255,0.15);
+}
+
+/* ---- Access / GitHub button ---- */
+.prj-btn {
+    display: inline-block;
+    background: var(--p5-red);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    transform: skewX(-12deg);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.prj-btn--white {
+    background: #fff;
+    color: #000;
+}
+
+.prj-card:hover .prj-btn {
+    background: #fff;
+    color: #000;
+    transform: skewX(-12deg) scale(1.05);
+}
+.prj-card:hover .prj-btn--white {
+    background: var(--p5-red);
+    color: #fff;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .prj-thumb {
+        height: 140px;
+    }
+    .prj-frame {
+        clip-path: polygon(
+            14px 0%, calc(100% - 14px) 0%,
+            100% 14px, 100% calc(100% - 14px),
+            calc(100% - 14px) 100%, 14px 100%,
+            0% calc(100% - 14px), 0% 14px
+        );
+    }
+}
+
+@media (max-width: 480px) {
+    .prj-thumb {
+        height: 120px;
+    }
+    .prj-desc {
+        font-size: 0.62rem;
+    }
+}
